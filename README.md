@@ -28,10 +28,16 @@
   - port mapping
   - volume mapping
 
-First test:
-- `docker build -t channel-api-example .`
+Basic Docker:
+- `docker build -t django-example .`
 - `docker run -it -d --name django-example-app django-example`
 
-Commands: 
-- `docker build -t channel-api-example .`  ... t tag for image name
-- `docker-compose run --rm app sh -c "python manage.py collectstatic""`
+Docker Compose Commands: 
+- `docker-compose build`  
+- `docker-compose run --rm app sh -c "python manage.py collectstatic"`  ...overwrites docker-compose.yml command
+
+Linting:
+- `docker-compose run --rm app sh -c "flake8"`
+
+Unit Tests
+- `docker-compose run --rm app sh -c "python manage.py test`
