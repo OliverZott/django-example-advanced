@@ -28,5 +28,10 @@
   - port mapping
   - volume mapping
 
+First test:
+- `docker build -t channel-api-example .`
+- `docker run -it -d --name django-example-app django-example`
+
 Commands: 
+- `docker build -t channel-api-example .`  ... t tag for image name
 - `docker-compose run --rm app sh -c "python manage.py collectstatic""`

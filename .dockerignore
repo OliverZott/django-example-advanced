@@ -1,0 +1,17 @@
+# Files excluded from docker context (directory we are running docker from)
+
+# Git (dont need git stuff in container)
+.git
+.gitignore
+
+# Docker
+.docker
+
+# Python - local dev stuff
+app/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+app/*/*/*/__pycache__/
+.env/
+.venv/
+venv/
