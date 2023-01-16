@@ -6,11 +6,14 @@ LABEL maintainer="dasmuesli"
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
 WORKDIR /app
 # to connect to django dev server
 EXPOSE 8000
 
+# default value; Overwritten by docker-compose.yml
+ARG DEV=false
 
 # virtual env on docker image... not really necessary
 # BEST PRACTICE - add user to not use root-user ->  security issues!
@@ -18,7 +21,10 @@ EXPOSE 8000
 RUN python -m venv /venv && \
     /venv/bin/pip install --upgrade pip && \
     /venv/bin/pip install -r /tmp/requirements.txt && \
-    rm -rf /tmp && \
+    if [ $DEV = "true" ]; \
+        then /venv/bin/pip install -r /tmp/requirements.dev.txt ; \
+    fi && \
+#    rm -rf /tmp && \
     adduser \
         --disabled-password \
         --no-create-home \
@@ -26,7 +32,7 @@ RUN python -m venv /venv && \
 
 
 # to have python commands without using full path
-ENV PATH="/py/bin:$PATH"
+ENV PATH="/venv/bin:$PATH"
 
 # switch to new user
 USER django-user

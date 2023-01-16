@@ -2,10 +2,12 @@ version: "3.9"                  # docker compose syntax version
 
 services:
   app1:
-    image: "django-advanced-image"
-    container_name: "django-advanced-container"
+#    image: "django-advanced-image"
+#    container_name: "django-advanced-container"
     build:
       context: .                # build docker file in current directory
+      args:
+        - DEV=true              # build argument for dev dependencies (flake8), overwrites Dockerfile "ARG"
     ports:
       - "8000:8000"             # port mapping local:container
     volumes:

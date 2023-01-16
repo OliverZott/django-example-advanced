@@ -5,6 +5,11 @@
 
 # Run & Debug
 
+- Build new image: `docker-compose build`  
+- Run Docker Service: `docker-compose run --rm app sh -c "python manage.py collectstatic"`
+- Linting: `docker-compose run --rm app sh -c "flake8"`
+- Unit Tests: `docker-compose run --rm app sh -c "python manage.py test`
+
 # Setup Project
 
 - Add Dockerhub Token as Github Action Secret:
@@ -28,16 +33,10 @@
   - port mapping
   - volume mapping
 
-Basic Docker:
+Docker:  
 - `docker build -t django-example .`
 - `docker run -it -d --name django-example-app django-example`
-
-Docker Compose Commands: 
 - `docker-compose build`  
 - `docker-compose run --rm app sh -c "python manage.py collectstatic"`  ...overwrites docker-compose.yml command
-
-Linting:
-- `docker-compose run --rm app sh -c "flake8"`
-
-Unit Tests
-- `docker-compose run --rm app sh -c "python manage.py test`
+- Linting: `docker-compose run --rm app sh -c "flake8"` (/venv/bin/flake8)
+- Unit Tests: `docker-compose run --rm app sh -c "python manage.py test`
