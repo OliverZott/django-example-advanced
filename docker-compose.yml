@@ -2,8 +2,8 @@ version: "3.9"                  # docker compose syntax version
 
 services:
   app1:
-#    image: "django-advanced-image"
-#    container_name: "django-advanced-container"
+#    image: "image1"
+#    container_name: "container1"
     build:
       context: .                # build docker file in current directory
       args:
@@ -11,6 +11,6 @@ services:
     ports:
       - "8000:8000"             # port mapping local:container
     volumes:
-      - ./app:/app              # map directories from system:container / for realtime (hot-reload) changes!
+      - ./app:/app              # map directories from system:container / for realtime syncing changes!
     command:                    # used to run service; overwritten by "docker compose run ..."
       sh -c "python manage.py runserver 0.0.0.0:8000"
