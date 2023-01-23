@@ -18,4 +18,4 @@ jobs:
       - name: Unit Tests
         run: docker-compose run --rm app1 sh -c "python manage.py test"
       - name: Linting
-        run: docker-compose run --rm app sh -c "flake8"
+        run: docker-compose run --rm app1 sh -c "flake8"
