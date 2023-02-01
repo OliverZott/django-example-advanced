@@ -2,8 +2,8 @@ version: "3.9"                  # docker compose syntax version
 
 services:
   app1:
-#    image: "image1"
-#    container_name: "container1"
+    #    image: "image1"
+    #    container_name: "container1"
     build:
       context: .                # build docker file in current directory
       args:
@@ -12,5 +12,28 @@ services:
       - "8000:8000"             # port mapping local:container
     volumes:
       - ./app:/app              # map directories from system:container / for realtime syncing changes!
-    command:                    # used to run service; overwritten by "docker compose run ..."
+    command: # used to run service; overwritten by "docker compose run ..."
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DB_HOST: db1
+      DB_NAME: devdb
+      #      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      - db1
+
+  db1:
+    image: postgres:15.1-alpine
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432-5432'
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+
+volumes:
+  dev-db-data:
+    driver: local

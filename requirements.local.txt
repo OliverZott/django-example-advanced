@@ -2,3 +2,4 @@ Django
 djangorestframework
 autopep8
 flake8
+psycopg
