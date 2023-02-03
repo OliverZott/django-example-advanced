@@ -2,4 +2,4 @@ Django
 djangorestframework
 autopep8
 flake8
-psycopg
+psycopg2-binary

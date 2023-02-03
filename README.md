@@ -7,7 +7,7 @@
 To build / run container:
 
 - Build new image: `docker-compose build`
-  - The "app"-name is specified in docker-compose.yml under services.
+    - The "app"-name is specified in docker-compose.yml under services.
 - Remove containers: `docker-compose down`
 - Run Docker Container: `docker-compose up`  --> check `localhost:8000`
 
@@ -15,8 +15,9 @@ Run specific command in container:
 
 - Run interactive shell: `docker-compose run app1 sh`
 - Run Docker Service: `docker-compose run --rm app sh -c "python manage.py collectstatic"`
-- Linting: `docker-compose run --rm app1 sh -c "flake8"`
+- Linting: `docker-compose run --rm app1 sh -c "flake8"` us `# noqa` to ignore file
 - Unit Tests: `docker-compose run --rm app1 sh -c "python manage.py test"`
+- Run a django command: ` docker-compose run --rm app1 sh -c "python manage.py wait_for_db"`
 
 # Development Steps
 
@@ -30,14 +31,14 @@ Run specific command in container:
 ## 1. Setup Project
 
 - Add Dockerhub **Token** as GitHub Action Secret:
-  - Generate Docker token
-  - Add GitHub Action secrets: username and token
+    - Generate Docker token
+    - Add GitHub Action secrets: username and token
 - **Docker** Setup
-  - Create empty folder structure with (readme, docker, docker-compose, ...)
-  - `docker build`, `codcker-compose build`, `docker-compose up`
+    - Create empty folder structure with (readme, docker, docker-compose, ...)
+    - `docker build`, `codcker-compose build`, `docker-compose up`
 - **Django** Setup
-  - Create django app inside docker container: `docker-compose run --rm app1 sh -c "django-admin startproject app .`
-  - Everything gets mapped automatically to local directory via **volumes:** definition in docker-compose.yml
+    - Create django app inside docker container: `docker-compose run --rm app1 sh -c "django-admin startproject app .`
+    - Everything gets mapped automatically to local directory via **volumes:** definition in docker-compose.yml
 - **GitHub Actions**
 -
 
@@ -55,3 +56,9 @@ Run specific command in container:
 - Unit Tests: `docker-compose run --rm app sh -c "python manage.py test`
 
 ### GitHub Actions
+
+### Command
+
+- `docker-compose run --rm app1 sh -c "python manage.py startapp core"`
+- Folder structure for django to recognize it as command
+    - core - management - commands
