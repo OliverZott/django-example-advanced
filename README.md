@@ -62,3 +62,8 @@ Run specific command in container:
 - `docker-compose run --rm app1 sh -c "python manage.py startapp core"`
 - Folder structure for django to recognize it as command
     - core - management - commands
+
+### Migration
+
+- `python manage.py makemigration`
+- `python manage.py migrate`

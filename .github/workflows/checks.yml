@@ -1,10 +1,10 @@
 ---
 name: Checks
 
-on: [push]  # Trigger
+on: [ push ]  # Trigger
 
 jobs:
-  test-lint:  # job ID
+  test-lint: # job ID
     name: Test and Lint
     runs-on: ubuntu-20.04   # with preinstalled docker-compose
     steps:
@@ -16,6 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Unit Tests
-        run: docker-compose run --rm app1 sh -c "python manage.py test"
+        run: docker-compose run --rm app1 sh -c "python manage.py wait_for_db && python manage.py test"
       - name: Linting
         run: docker-compose run --rm app1 sh -c "flake8"
